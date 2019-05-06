@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Factory/figure.h"
 
 using namespace std;
 
