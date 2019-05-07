@@ -39,3 +39,22 @@ public:
     }
 };
 
+
+Figure *createObj(Figure::Type type)
+{
+    switch (type) {
+    case Figure::Type::SQUARE:
+        return new Square();
+    case Figure::Type::CIRCLE:
+        return new Circle();
+    default:
+        return nullptr;
+    }
+}
+
+Figure *create(std::istream *is)
+{
+    Figure::Type type;
+    is >> type;
+    Figure *obj = createObj(type);
+}
