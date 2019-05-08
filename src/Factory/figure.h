@@ -3,39 +3,55 @@
 #include <cstdint>
 #include <ostream>
 #include <istream>
+#include <string>
 
 class Figure {
 public:
     enum class Type : uint8_t {
+        NONE,
         SQUARE,
         CIRCLE,
         RECTANGLE
     };
-    virtual void write(std::ostream &os) const = 0;
-    virtual void read(std::istream& is) = 0;
+    Figure(const std::string &name) : mName{name} {}
+    virtual ~Figure() {}
+    virtual void write(std::ostream &os) const
+    {
+        os << mName;
+    }
+    virtual void read(std::istream& is)
+    {
+        is >> mName;
+    }
+
+    std::string mName;
 };
 
 class Square : public Figure {
 public:
+    Square() : Figure("SQUARE") {}
     void write(std::ostream &os) const
     {
         os << static_cast<uint8_t>(Type::SQUARE);
-        // other members
+        Figure::write(os);
     }
     virtual void read(std::istream& is)
     {
+        Figure::read(is);
     }
 };
 
 class Circle : public Figure {
 public:
+    Circle() : Figure("CIRCLE") {}
     void write(std::ostream &os) const
     {
         os << static_cast<uint8_t>(Type::CIRCLE);
-        // other members
+        Figure::write(os);
     }
     virtual void read(std::istream& is)
     {
+        Figure::read(is);
     }
 };
 
@@ -52,9 +68,12 @@ Figure *createObj(Figure::Type type)
     }
 }
 
-Figure *create(std::istream *is)
+Figure *create(std::istream &is) // funkcja fabryczna
 {
-    Figure::Type type;
-    is >> type;
+    uint8_t tmp{0};
+    is >> tmp;
+    Figure::Type type{static_cast<Figure::Type>(tmp)};
     Figure *obj = createObj(type);
+    obj->read(is);
+    return obj;
 }
