@@ -74,6 +74,7 @@ Figure *create(std::istream &is) // funkcja fabryczna
     is >> tmp;
     Figure::Type type{static_cast<Figure::Type>(tmp)};
     Figure *obj = createObj(type);
+    Q_ASSERT(obj);
     obj->read(is);
     return obj;
 }
