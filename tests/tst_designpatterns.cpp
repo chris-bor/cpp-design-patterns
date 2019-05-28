@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <fstream>
-#include "../../Factory/figure.h"
+#include "src/Factory/figure.h"
 
 // add necessary includes here
 

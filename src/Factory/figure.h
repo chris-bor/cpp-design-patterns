@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QtGlobal>
+
 #include <cstdint>
 #include <ostream>
 #include <istream>
