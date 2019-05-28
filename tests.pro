@@ -6,4 +6,4 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_designpatterns.cpp
+SOURCES +=  /tests/tst_designpatterns.cpp
