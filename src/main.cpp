@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Factory/figure.h"
+#include "factory/figure.h"
 
 using namespace std;
 

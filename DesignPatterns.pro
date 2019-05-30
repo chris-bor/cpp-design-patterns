@@ -4,7 +4,8 @@ CONFIG -= app_bundle
 CONFIG += qt
 
 SOURCES += \
-        src/main.cpp
+    src/main.cpp
 
 HEADERS += \
-    Factory/figure.h
+    src/factory/figure.h \
+    src/factory/scaleablefactory.h
