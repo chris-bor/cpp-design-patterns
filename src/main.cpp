@@ -8,6 +8,8 @@ int main()
 {
     cout << "Hello World!" << endl;
 
+    using namespace Factory;
+
     // Not scaleable factory:
     // Not scaleable factory:
     std::ofstream factoryFile("factory.txt");

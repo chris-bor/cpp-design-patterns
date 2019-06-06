@@ -11,6 +11,8 @@
 // Uniezależniona od klas konkretnych
 // Sprytne wskaźniki
 
+namespace ScaleableFactory {
+
 class Figure {
 public:
     enum class Type : uint8_t {
@@ -39,8 +41,9 @@ public:
         return factory;
     }
 
-    void registerFigure(CreateFig fun) {
-        mCreators.emplace(mCurrentId, fun);
+    int registerFigure(CreateFig fun) {
+        mCreators.emplace(mCurrentId++, fun);
+        return mCurrentId;
     }
 
     Figure *create(int id) {
@@ -54,3 +57,25 @@ private:
     using Creators = std::map<int, CreateFig>;
     Creators mCreators;
 };
+
+class Square : public Figure {
+public:
+    static Figure* create() { return new Square; }
+    Square() : Figure("SQUARE") {}
+    static int mId;
+};
+
+class Circle : public Figure {
+public:
+    static Figure* create() { return new Square; }
+    Circle() : Figure("CIRCLE") {}
+    static int mId;
+};
+
+struct RegisterFigure {
+    template<typename T> void operator()(T) {
+        T::mId = FigFactory::getInstance().registerFigure(T::create);
+    }
+};
+
+} // namespace ScaleableFactory
