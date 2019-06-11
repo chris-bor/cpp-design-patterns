@@ -42,7 +42,8 @@ public:
     }
 
     int registerFigure(CreateFig fun) {
-        mCreators.emplace(mCurrentId++, fun);
+        ++mCurrentId;
+        mCreators.emplace(mCurrentId, fun);
         return mCurrentId;
     }
 
@@ -53,7 +54,7 @@ public:
         return nullptr;
     }
 private:
-    int mCurrentId;
+    int mCurrentId{-1};
     using Creators = std::map<int, CreateFig>;
     Creators mCreators;
 };
@@ -67,7 +68,7 @@ public:
 
 class Circle : public Figure {
 public:
-    static Figure* create() { return new Square; }
+    static Figure* create() { return new Circle; }
     Circle() : Figure("CIRCLE") {}
     static int mId;
 };

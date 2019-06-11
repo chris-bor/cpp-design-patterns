@@ -75,6 +75,11 @@ void DesignPatterns::test_scaleableFactory()
     Circle::mId = FigFactory::getInstance().registerFigure(Circle::create);
     Figure* square = FigFactory::getInstance().create(Square::mId);
     Figure* circle = FigFactory::getInstance().create(Circle::mId);
+    QVERIFY(Square::mId != Circle::mId);
+    QCOMPARE(Square::mId, 0);
+    QCOMPARE(Circle::mId, Square::mId+1);
+    QCOMPARE(square->mName, std::string("SQUARE"));
+    QCOMPARE(circle->mName, std::string("CIRCLE"));
 }
 
 QTEST_APPLESS_MAIN(DesignPatterns)
