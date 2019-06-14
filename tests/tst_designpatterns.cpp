@@ -1,5 +1,6 @@
 #include <QtTest>
 #include <fstream>
+#include "src/factory/abstractfactory.h"
 #include "src/factory/figure.h"
 #include "src/factory/scaleablefactory.h"
 
@@ -21,7 +22,7 @@ private slots:
     void cleanupTestCase();
     void test_factory();
     void test_scaleableFactory();
-
+    void test_abstractFactory();
 };
 
 DesignPatterns::DesignPatterns()
@@ -80,6 +81,16 @@ void DesignPatterns::test_scaleableFactory()
     QCOMPARE(Circle::mId, Square::mId+1);
     QCOMPARE(square->mName, std::string("SQUARE"));
     QCOMPARE(circle->mName, std::string("CIRCLE"));
+}
+
+void DesignPatterns::test_abstractFactory()
+{
+    qDebug() << __FUNCTION__;
+    using namespace  AbstractFactory;
+    using WxFactory = struct ConcreteWxFactory;
+    WxFactory wxFactory{};
+    auto *wxButton = wxFactory.doCreate(identity<Button>());
+    QVERIFY(static_cast<WxButton*>(wxButton));
 }
 
 QTEST_APPLESS_MAIN(DesignPatterns)

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 // Wiąże inne rodzaje fabryk.
 // Hierarchia fabryk i hierarchia konkretnych typów.
 
@@ -62,4 +64,34 @@ private:
     bool isWx() const { return true; }
 };
 
+
+// Generic version:
+template <typename X> struct identity {
+    typedef X type;
+};
+
+template <typename T> struct AbstractUnit {
+    virtual T* doCreate(identity<T>) = 0;
+    virtual ~AbstractUnit(){}
+};
+
+struct AbstractWidgetFactory : public AbstractUnit<Button>, AbstractUnit<ScrollBar> {
+    template<typename T> T* create() {
+        AbstractUnit<T>* unit = this;
+        return unit->doCreate(identity<T>());
+    }
+};
+
+template <typename Abstract, typename Concrete, typename Base>
+struct ConcreteUnit : public Base {
+    virtual Abstract* doCreate(identity<Abstract>) {
+        return new Concrete;
+    }
+};
+
+struct ConcreteWxFactory : public ConcreteUnit<Button, WxButton, ConcreteUnit<ScrollBar, WxScrollBar, AbstractWidgetFactory>>
+{};
+
+//typedef AbstractUnit<std::vector<Button, ScrollBar>> WidgetFactoryShort;
+//typedef ConcreteUnit<WidgetFactoryShort, std::vector<WxButton, WxScrollBar>> WxFactoryShort;
 }
