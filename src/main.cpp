@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
-#include "Factory/figure.h"
+#include "factory/figure.h"
 
 using namespace std;
 
 int main()
 {
     cout << "Hello World!" << endl;
+
+    using namespace Factory;
 
     // Not scaleable factory:
     // Not scaleable factory:
