@@ -3,6 +3,7 @@
 #include "src/factory/abstractfactory.h"
 #include "src/factory/figure.h"
 #include "src/factory/scaleablefactory.h"
+#include "src/prototype/prototype.h"
 
 // add necessary includes here
 
@@ -23,6 +24,7 @@ private slots:
     void test_factory();
     void test_scaleableFactory();
     void test_abstractFactory();
+    void test_prototype();
 };
 
 DesignPatterns::DesignPatterns()
@@ -102,6 +104,26 @@ void DesignPatterns::test_abstractFactory()
     delete wxButton;
 }
 
+void DesignPatterns::test_prototype()
+{
+    qDebug() << __FUNCTION__;
+    using namespace Prototype;
+    Figure* square = new Square;
+    Figure* circle = new Circle;
+    Figure* circle2 = circle->clone();
+    FigureFactory factory{};
+    auto circleId = factory.registerFigure(circle);
+    auto squareId = factory.registerFigure(square);
+    auto circle3 = factory.create(circleId);
+    auto square3 = factory.create(squareId);
+    QVERIFY(dynamic_cast<Circle*>(circle2));
+    QVERIFY(dynamic_cast<Circle*>(circle3));
+    QVERIFY(dynamic_cast<Square*>(square3));
+    delete square;
+    delete circle;
+    delete circle2;
+    delete circle3;
+    delete square3;
 }
 
 QTEST_APPLESS_MAIN(DesignPatterns)
