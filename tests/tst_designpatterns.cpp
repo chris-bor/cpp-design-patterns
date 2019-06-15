@@ -63,6 +63,10 @@ void DesignPatterns::test_factory()
 //    QCOMPARE(circle->mName, circle2->mName);
 
 //    ifstream file ("factory.bin", ios::in|ios::binary|ios::ate);
+    delete square;
+    delete circle;
+    delete square2;
+    delete circle2;
 }
 
 void DesignPatterns::test_scaleableFactory()
@@ -81,6 +85,8 @@ void DesignPatterns::test_scaleableFactory()
     QCOMPARE(Circle::mId, Square::mId+1);
     QCOMPARE(square->mName, std::string("SQUARE"));
     QCOMPARE(circle->mName, std::string("CIRCLE"));
+    delete square;
+    delete circle;
 }
 
 void DesignPatterns::test_abstractFactory()
