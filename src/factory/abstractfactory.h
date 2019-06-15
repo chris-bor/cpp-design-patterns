@@ -8,10 +8,16 @@
 namespace AbstractFactory {
 
 class Button {
+public:
+    virtual ~Button() = default;
 };
 class ScrollBar {
+public:
+    virtual ~ScrollBar() = default;
 };
 class TextBox {
+public:
+    virtual ~TextBox() = default;
 };
 
 class WxButton : public Button {

@@ -90,7 +90,12 @@ void DesignPatterns::test_abstractFactory()
     using WxFactory = struct ConcreteWxFactory;
     WxFactory wxFactory{};
     auto *wxButton = wxFactory.doCreate(identity<Button>());
-    QVERIFY(static_cast<WxButton*>(wxButton));
+    QVERIFY(wxButton != nullptr);
+    QVERIFY(typeid(*wxButton).name() == typeid(WxButton).name());
+    QVERIFY(dynamic_cast<WxButton*>(wxButton));
+    delete wxButton;
+}
+
 }
 
 QTEST_APPLESS_MAIN(DesignPatterns)
