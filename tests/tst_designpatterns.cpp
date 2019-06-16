@@ -1,33 +1,14 @@
-#include <QtTest>
 #include <fstream>
+#include "tst_designpatterns.h"
 #include "src/factory/abstractfactory.h"
 #include "src/factory/figure.h"
 #include "src/factory/scaleablefactory.h"
 #include "src/prototype/prototype.h"
 #include "src/singleton/singleton.h"
 
-// add necessary includes here
 
 int ScaleableFactory::Circle::mId{0};
 int ScaleableFactory::Square::mId{0};
-
-class DesignPatterns : public QObject
-{
-    Q_OBJECT
-
-public:
-    DesignPatterns();
-    ~DesignPatterns();
-
-private slots:
-    void initTestCase();
-    void cleanupTestCase();
-    void test_factory();
-    void test_scaleableFactory();
-    void test_abstractFactory();
-    void test_prototype();
-    void test_singleton();
-};
 
 DesignPatterns::DesignPatterns()
 {
@@ -135,7 +116,3 @@ void DesignPatterns::test_singleton()
      Singleton& s = Singleton::getInstance();
      Q_UNUSED(s);
 }
-
-QTEST_APPLESS_MAIN(DesignPatterns)
-
-#include "tst_designpatterns.moc"
