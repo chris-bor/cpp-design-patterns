@@ -4,6 +4,7 @@
 #include "src/factory/figure.h"
 #include "src/factory/scaleablefactory.h"
 #include "src/prototype/prototype.h"
+#include "src/singleton/singleton.h"
 
 // add necessary includes here
 
@@ -25,6 +26,7 @@ private slots:
     void test_scaleableFactory();
     void test_abstractFactory();
     void test_prototype();
+    void test_singleton();
 };
 
 DesignPatterns::DesignPatterns()
@@ -124,6 +126,14 @@ void DesignPatterns::test_prototype()
     delete circle2;
     delete circle3;
     delete square3;
+}
+
+void DesignPatterns::test_singleton()
+{
+     qDebug() << __FUNCTION__;
+     using namespace singleton;
+     Singleton& s = Singleton::getInstance();
+     Q_UNUSED(s);
 }
 
 QTEST_APPLESS_MAIN(DesignPatterns)
