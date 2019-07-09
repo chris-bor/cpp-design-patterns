@@ -5,7 +5,7 @@
 #include "src/factory/scaleablefactory.h"
 #include "src/prototype/prototype.h"
 #include "src/singleton/singleton.h"
-
+#include "src/visitor/visitor.h"
 
 int ScaleableFactory::Circle::mId{0};
 int ScaleableFactory::Square::mId{0};
@@ -115,4 +115,28 @@ void DesignPatterns::test_singleton()
      using namespace singleton;
      Singleton& s = Singleton::getInstance();
      Q_UNUSED(s);
+}
+
+void DesignPatterns::test_cyclicVisitor()
+{
+    using namespace cyclicvisitor;
+    typedef std::vector<std::unique_ptr<Unit>> Units;
+
+    Units units;
+    auto infantry = std::make_unique<Infantry>();
+    infantry->addSoldiers(10);
+    auto tank = std::make_unique<Tank>();
+    tank->addTanks(20);
+    auto rocket = std::make_unique<Rocket>();
+    rocket->addRockets(30);
+    units.emplace_back(std::move(infantry));
+    units.emplace_back(std::move(tank));
+    units.emplace_back(std::move(rocket));
+    Statistics s;
+    for(const auto &u : units) {
+        u->accept(s);
+    }
+    QCOMPARE(10, s.soldiers());
+    QCOMPARE(20, s.tanks());
+    QCOMPARE(30, s.rockets());
 }

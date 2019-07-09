@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <QtTest>
-#include "tst_cpp_deliberates.h"
 
 class CppDeliberates : public QObject
 {

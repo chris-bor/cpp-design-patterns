@@ -11,4 +11,5 @@ HEADERS += \
     src/factory/figure.h \
     src/factory/scaleablefactory.h \
     src/prototype/prototype.h \
-    src/singleton/singleton.h
+    src/singleton/singleton.h \
+    src/visitor/visitor.h

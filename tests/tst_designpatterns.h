@@ -18,4 +18,5 @@ private slots:
     void test_abstractFactory();
     void test_prototype();
     void test_singleton();
+    void test_cyclicVisitor();
 };
